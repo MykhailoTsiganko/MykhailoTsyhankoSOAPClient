@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MykhailoTsyhankoSOAPClient.iml" filepath="$PROJECT_DIR$/MykhailoTsyhankoSOAPClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MykhailoTsyhankoLibraryServiceClient.iml" filepath="$PROJECT_DIR$/MykhailoTsyhankoLibraryServiceClient.iml" />
     </modules>
   </component>
 </project>

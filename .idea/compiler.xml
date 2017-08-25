@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="MykhailoTsyhankoLibraryServiceClient" />
         <module name="MykhailoTsyhankoSOAPClient" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="MykhailoTsyhankoLibraryServiceClient" target="1.8" />
       <module name="MykhailoTsyhankoSOAPClient" target="1.5" />
     </bytecodeTargetLevel>
   </component>

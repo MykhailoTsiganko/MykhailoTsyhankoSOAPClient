@@ -3,24 +3,28 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.lab.soap</groupId>
-    <artifactId>MykhailoTsyhankoSOAPClient</artifactId>
+    <artifactId>MykhailoTsyhankoLibraryServiceClient</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>MykhailoTsyhankoSOAPClient</name>
+    <name>MykhailoTsyhankoLibraryServiceClient</name>
     <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <ehcache.version>2.6.0</ehcache.version>
+        <cxf.version>3.1.12</cxf.version>
+
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.11</version>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <dependency>
@@ -28,57 +32,57 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-client -->
         <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-codegen-plugin</artifactId>
-            <version>3.1.12</version>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.19.4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.cxf.xjcplugins/cxf-xjc-ts -->
+
         <dependency>
-            <groupId>org.apache.cxf.xjcplugins</groupId>
-            <artifactId>cxf-xjc-ts</artifactId>
-            <version>3.1.0</version>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.19.4</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-common-utilities</artifactId>
-            <version>2.5.11</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.cxf.xjcplugins/cxf-xjc-ts -->
-        <dependency>
-            <groupId>org.apache.cxf.xjcplugins</groupId>
-            <artifactId>cxf-xjc-ts</artifactId>
-            <version>3.1.0</version>
-        </dependency>
+
+
 
     </dependencies>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-codegen-plugin</artifactId>
-                <version>3.1.12</version>
-                <executions>
-                    <execution>
-                        <id>generate-sources</id>
-                        <phase>generate-sources</phase>
-                        <inherited>true</inherited>
-                        <configuration>
-                            <sourceRoot>${basedir}/src/main/java</sourceRoot>
-                            <wsdlOptions>
-                                <wsdlOption>
-                                    <wsdl>${basedir}/src/main/resources/service.wsdl</wsdl>
-                                </wsdlOption>
-                            </wsdlOptions>
-                        </configuration>
-                        <goals>
-                            <goal>wsdl2java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-
-                </dependencies>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <properties>
+                        <!-- Setting ReportNG listeners -->
+                        <property>
+                            <name>listener</name>
+                            <value>org.uncommons.reportng.HTMLReporter,com.epam.lab.gmail.listeners.LoggerListener</value>
+                        </property>
+                    </properties>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
             </plugin>
         </plugins>
     </build>
