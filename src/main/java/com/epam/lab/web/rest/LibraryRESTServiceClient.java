@@ -1,9 +1,10 @@
 package com.epam.lab.web.rest;
 
-import com.epam.lab.model.Book;
 import com.epam.lab.web.LibraryService;
-import com.epam.lab.web.fault.LibraryFault;
-import com.epam.lab.web.fault.ServiceException;
+
+import com.epam.lab.web.soap.Book;
+import com.epam.lab.web.soap.LibraryFault;
+import com.epam.lab.web.soap.ServiceException;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -166,9 +167,7 @@ public class LibraryRESTServiceClient implements LibraryService{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ServiceException ex = new ServiceException();
-        ex.setLibraryFault(faultInfo);
-        return ex;
+        return new ServiceException(faultInfo);
 
     }
 

@@ -6,7 +6,7 @@ import com.epam.lab.web.soap.LibraryServiceImplService;
 public class ServiceFactory {
     public static final String REST= "REST";
     public static final String SOAP= "SOAP";
-   public static LibraryService getLibraryServic(String choise){
+   public static LibraryService getLibraryService(String choise){
         LibraryService service;
         if(choise.equals(REST)) {
             service = new LibraryRESTServiceClient();

@@ -1,6 +1,8 @@
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://web.soap.lab.epam.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="LibraryServiceImplService" targetNamespace="http://web.soap.lab.epam.com/">
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.web.lab.epam.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="LibraryServiceImplService" targetNamespace="http://soap.web.lab.epam.com/">
     <wsdl:types>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://web.soap.lab.epam.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://web.soap.lab.epam.com/">
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.web.lab.epam.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://soap.web.lab.epam.com/">
+            <xs:element name="addBook" type="tns:addBook"/>
+            <xs:element name="addBookResponse" type="tns:addBookResponse"/>
             <xs:element name="exchangeBook" type="tns:exchangeBook"/>
             <xs:element name="exchangeBookResponse" type="tns:exchangeBookResponse"/>
             <xs:element name="getAllBooks" type="tns:getAllBooks"/>
@@ -9,28 +11,38 @@
             <xs:element name="getAuthorBooksResponse" type="tns:getAuthorBooksResponse"/>
             <xs:element name="getBook" type="tns:getBook"/>
             <xs:element name="getBookResponse" type="tns:getBookResponse"/>
-            <xs:element name="turnBackBook" type="tns:turnBackBook"/>
-            <xs:element name="turnBackBookResponse" type="tns:turnBackBookResponse"/>
-            <xs:complexType name="getBook">
+            <xs:element name="removeBook" type="tns:removeBook"/>
+            <xs:element name="removeBookResponse" type="tns:removeBookResponse"/>
+            <xs:complexType name="addBook">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="getBookResponse">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="return" type="tns:book"/>
+                    <xs:element minOccurs="0" name="arg0" type="tns:book"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="book">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="authorName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="author" type="xs:string"/>
                     <xs:element minOccurs="0" name="genre" type="xs:string"/>
                     <xs:element minOccurs="0" name="name" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="addBookResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="serviceFaultInfo">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="removeBook">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="removeBookResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="exchangeBook">
@@ -44,14 +56,14 @@
                     <xs:element minOccurs="0" name="return" type="tns:book"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType name="turnBackBook">
+            <xs:complexType name="getBook">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="arg0" type="tns:book"/>
+                    <xs:element minOccurs="0" name="arg0" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType name="turnBackBookResponse">
+            <xs:complexType name="getBookResponse">
                 <xs:sequence>
-                    <xs:element name="return" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="return" type="tns:book"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="getAllBooks">
@@ -82,23 +94,38 @@
             </xs:complexType>
         </xs:schema>
     </wsdl:types>
-    <wsdl:message name="getBook">
-        <wsdl:part element="tns:getBook" name="parameters"></wsdl:part>
+    <wsdl:message name="addBook">
+        <wsdl:part element="tns:addBook" name="parameters"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removeBookResponse">
+        <wsdl:part element="tns:removeBookResponse" name="parameters"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getAuthorBooksResponse">
+        <wsdl:part element="tns:getAuthorBooksResponse" name="parameters"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="exchangeBook">
         <wsdl:part element="tns:exchangeBook" name="parameters"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="turnBackBook">
-        <wsdl:part element="tns:turnBackBook" name="parameters"></wsdl:part>
+    <wsdl:message name="getBook">
+        <wsdl:part element="tns:getBook" name="parameters"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="getBookResponse">
         <wsdl:part element="tns:getBookResponse" name="parameters"></wsdl:part>
     </wsdl:message>
+    <wsdl:message name="addBookResponse">
+        <wsdl:part element="tns:addBookResponse" name="parameters"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getAllBooksResponse">
+        <wsdl:part element="tns:getAllBooksResponse" name="parameters"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="removeBook">
+        <wsdl:part element="tns:removeBook" name="parameters"></wsdl:part>
+    </wsdl:message>
     <wsdl:message name="getAllBooks">
         <wsdl:part element="tns:getAllBooks" name="parameters"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="turnBackBookResponse">
-        <wsdl:part element="tns:turnBackBookResponse" name="parameters"></wsdl:part>
+    <wsdl:message name="exchangeBookResponse">
+        <wsdl:part element="tns:exchangeBookResponse" name="parameters"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="ServiceException">
         <wsdl:part element="tns:LibraryFault" name="ServiceException"></wsdl:part>
@@ -106,19 +133,15 @@
     <wsdl:message name="getAuthorBooks">
         <wsdl:part element="tns:getAuthorBooks" name="parameters"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="exchangeBookResponse">
-        <wsdl:part element="tns:exchangeBookResponse" name="parameters"></wsdl:part>
-    </wsdl:message>
-    <wsdl:message name="getAllBooksResponse">
-        <wsdl:part element="tns:getAllBooksResponse" name="parameters"></wsdl:part>
-    </wsdl:message>
-    <wsdl:message name="getAuthorBooksResponse">
-        <wsdl:part element="tns:getAuthorBooksResponse" name="parameters"></wsdl:part>
-    </wsdl:message>
     <wsdl:portType name="LibraryService">
-        <wsdl:operation name="getBook">
-            <wsdl:input message="tns:getBook" name="getBook"></wsdl:input>
-            <wsdl:output message="tns:getBookResponse" name="getBookResponse"></wsdl:output>
+        <wsdl:operation name="addBook">
+            <wsdl:input message="tns:addBook" name="addBook"></wsdl:input>
+            <wsdl:output message="tns:addBookResponse" name="addBookResponse"></wsdl:output>
+            <wsdl:fault message="tns:ServiceException" name="ServiceException"></wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="removeBook">
+            <wsdl:input message="tns:removeBook" name="removeBook"></wsdl:input>
+            <wsdl:output message="tns:removeBookResponse" name="removeBookResponse"></wsdl:output>
             <wsdl:fault message="tns:ServiceException" name="ServiceException"></wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="exchangeBook">
@@ -126,9 +149,10 @@
             <wsdl:output message="tns:exchangeBookResponse" name="exchangeBookResponse"></wsdl:output>
             <wsdl:fault message="tns:ServiceException" name="ServiceException"></wsdl:fault>
         </wsdl:operation>
-        <wsdl:operation name="turnBackBook">
-            <wsdl:input message="tns:turnBackBook" name="turnBackBook"></wsdl:input>
-            <wsdl:output message="tns:turnBackBookResponse" name="turnBackBookResponse"></wsdl:output>
+        <wsdl:operation name="getBook">
+            <wsdl:input message="tns:getBook" name="getBook"></wsdl:input>
+            <wsdl:output message="tns:getBookResponse" name="getBookResponse"></wsdl:output>
+            <wsdl:fault message="tns:ServiceException" name="ServiceException"></wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="getAllBooks">
             <wsdl:input message="tns:getAllBooks" name="getAllBooks"></wsdl:input>
@@ -142,12 +166,24 @@
     </wsdl:portType>
     <wsdl:binding name="LibraryServiceImplServiceSoapBinding" type="tns:LibraryService">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <wsdl:operation name="getBook">
+        <wsdl:operation name="addBook">
             <soap:operation soapAction="" style="document"/>
-            <wsdl:input name="getBook">
+            <wsdl:input name="addBook">
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="getBookResponse">
+            <wsdl:output name="addBookResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="ServiceException">
+                <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="removeBook">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="removeBook">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="removeBookResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
             <wsdl:fault name="ServiceException">
@@ -166,14 +202,17 @@
                 <soap:fault name="ServiceException" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
-        <wsdl:operation name="turnBackBook">
+        <wsdl:operation name="getBook">
             <soap:operation soapAction="" style="document"/>
-            <wsdl:input name="turnBackBook">
+            <wsdl:input name="getBook">
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="turnBackBookResponse">
+            <wsdl:output name="getBookResponse">
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="ServiceException">
+                <soap:fault name="ServiceException" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="getAllBooks">
             <soap:operation soapAction="" style="document"/>
@@ -199,7 +238,7 @@
     </wsdl:binding>
     <wsdl:service name="LibraryServiceImplService">
         <wsdl:port binding="tns:LibraryServiceImplServiceSoapBinding" name="LibraryServiceImplPort">
-            <soap:address location="http://localhost:8080/MykhailoTsyhankoSOAPService/libraryService"/>
+            <soap:address location="http://localhost:8080/MykhailoTsyhankoLibraryService/librarySOAP"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
